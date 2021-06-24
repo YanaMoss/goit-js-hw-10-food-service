@@ -12,14 +12,25 @@ window.onload = () => {
    console.log(page);
    const toggle = document.getElementById("theme-switch-toggle");
    toggle.addEventListener("change", switchTheme);
-   localStorage.getItem('theme');
-   page.classList.add("light-theme");
+   if (localStorage.getItem('theme') === 'light') {
+      page.classList.add("light-theme");
+      page.classList.remove("dark-theme");
+   }
+      else if (localStorage.getItem('theme') === 'dark') {
+      page.classList.add("dark-theme");
+      page.classList.remove("light-theme");
+      }
+
    function switchTheme(event) {
-      if (page.classList.contains("light-theme") === true) {
+      if (page.classList.contains("light-theme") === false && page.classList.contains("dark-theme") === false) {
+         page.classList.add("dark-theme");
+         localStorage.setItem('theme', 'dark');
+      }
+      else if (page.classList.contains("light-theme") === true) {
          page.classList.replace("light-theme", "dark-theme");
          localStorage.setItem('theme', 'dark');
       }
-      else {
+      else{
          page.classList.replace("dark-theme", "light-theme");
          localStorage.setItem('theme', 'light');
       }
